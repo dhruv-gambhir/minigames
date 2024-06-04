@@ -25,7 +25,13 @@ function TicTacToe() {
   const Box = ({ id }) => (
     <div
       id={id}
-      onClick={() => handleClick1(id)}
+      onClick={() => {
+        if (multiplayer) {
+          handleClick2(id);
+        } else {
+          handleClick1(id);
+        }
+      }}
       className="h-32 w-32 bg-white border-black border-2 flex justify-center items-center"
     >
       {boxStatus.get(id) == 1 && (
