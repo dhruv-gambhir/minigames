@@ -54,7 +54,10 @@ function TicTacToe() {
     newBoxStatus.set(id, 1);
     setBoxStatus(newBoxStatus);
 
-    newBoxStatus.set(Computer(boxStatus), 2);
+    const computerMove = Computer(newBoxStatus);
+    newBoxStatus.set(computerMove, 2);
+
+    setBoxStatus(newBoxStatus);
   };
 
   const handleClick2 = (id) => {
