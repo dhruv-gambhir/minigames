@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import Computer from "./Computer";
 
 function TicTacToe() {
   const [alt, setAlt] = useState(1);
 
   const [win, setWin] = useState(0);
+
+  const [multiplayer, setMultipayer] = useState(false);
 
   const initialBoxState = new Map([
     ["box1", 0],
@@ -22,7 +25,7 @@ function TicTacToe() {
   const Box = ({ id }) => (
     <div
       id={id}
-      onClick={() => handleClick(id)}
+      onClick={() => handleClick1(id)}
       className="h-32 w-32 bg-white border-black border-2 flex justify-center items-center"
     >
       {boxStatus.get(id) == 1 && (
@@ -38,7 +41,17 @@ function TicTacToe() {
     </div>
   );
 
-  const handleClick = (id) => {
+  const handleClick1 = (id) => {
+    if (win !== 0 || boxStatus.get(id) !== 0) return;
+
+    const newBoxStatus = new Map(boxStatus);
+    newBoxStatus.set(id, 1);
+    setBoxStatus(newBoxStatus);
+
+    newBoxStatus.set(Computer(boxStatus), 2);
+  };
+
+  const handleClick2 = (id) => {
     if (win !== 0 || boxStatus.get(id) !== 0) return;
 
     const newBoxStatus = new Map(boxStatus);
@@ -94,6 +107,29 @@ function TicTacToe() {
   return (
     <div className="min-h-screen bg-black flex flex-col items-center justify-center">
       <h1 className="text-white">TicTacToe</h1>
+
+      <div className="flex flex-row">
+        <button
+          className="bg-blue-500 px-8 py-2 text-white rounded m-2"
+          onClick={() => {
+            setMultipayer(false);
+            resetGame();
+          }}
+        >
+          1 Player
+        </button>
+
+        <button
+          className="bg-green-500 px-8 py-2 text-white rounded m-2"
+          onClick={() => {
+            setMultipayer(true);
+            resetGame();
+          }}
+        >
+          2 Player
+        </button>
+      </div>
+
       <div className="flex flex-col">
         <div className="flex flex-row">
           <Box id="box1" />
