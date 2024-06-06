@@ -1,0 +1,5 @@
+function FlappyBird() {
+    return <></>;
+}
+
+export default FlappyBird;
