@@ -1,1 +1,1 @@
-This project was built using React.js. Tailwind CSS is used for syling just for practice despite the lack of compatibility between postcss and react.
+This project was built using React.js. Tailwind CSS is used for syling.
