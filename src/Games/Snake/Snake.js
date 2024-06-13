@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import Control from "./Control";
+import Grid from "./Grid";
 
 function Snake() {
-    const [direction, setDirection] = useState();
+    const [dir, setDir] = useState(null);
 
     return (
-        <div className="min-h-screen bg-black flex items-center justify-center">
-            <div>
-                <h1 className="text-white text-center mb-8">Snake</h1>
+        <div className=" flex flex-row min-h-screen bg-black flex items-center justify-center">
+            <Grid dir={dir} />
+            <div className="w-16" />
+            <div className="flex flex-col justify-center items-center">
+                <h1 className="text-white text-center">Snake</h1>
+                <Control setDir={setDir} />
             </div>
-            <Control />
         </div>
     );
 }

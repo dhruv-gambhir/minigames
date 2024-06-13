@@ -7,6 +7,7 @@ function FlappyBird() {
     const [y, setY] = useState(0);
     const [isGameOver, setIsGameOver] = useState(false);
 
+    const [bars, setBars] = useState(null);
     const [topBarHeight, setTopBarHeight] = useState(10);
     const [botBarHeight, setBotBarHeight] = useState(10);
 
@@ -18,6 +19,44 @@ function FlappyBird() {
         setTopBarHeight(rnd1 * 4);
         setBotBarHeight(rnd2 * 4);
     };
+
+    const getBar = () => {
+        return (
+            <>
+                <div
+                    className="absolute"
+                    style={{
+                        top: "0",
+                        right: `${x}px`,
+                        height: `${topBarHeight}%`,
+                        width: "10px",
+                        background: "white",
+                    }}
+                />
+                <div
+                    className="absolute"
+                    style={{
+                        bottom: "0px",
+                        right: `${x}px`,
+                        height: `${botBarHeight}%`,
+                        width: "10px",
+                        background: "white",
+                    }}
+                />
+            </>
+        );
+    };
+
+    const getBars = () => bars;
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            const addBars = () => {
+                setBars((prevBars) => [...prevBars, getBar()]);
+            };
+        }, 100);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleJump = () => {
         setY((prevY) => {
@@ -83,46 +122,7 @@ function FlappyBird() {
                             height: "50px",
                             transition: "top 0.2s ease",
                         }}></img>
-                    <div
-                        className="absolute"
-                        style={{
-                            top: "0",
-                            right: `${x}px`,
-                            height: `${topBarHeight}%`,
-                            width: "10px",
-                            background: "white",
-                        }}
-                    />
-                    <div
-                        className="absolute"
-                        style={{
-                            bottom: "0px",
-                            right: `${x}px`,
-                            height: `${botBarHeight}%`,
-                            width: "10px",
-                            background: "white",
-                        }}
-                    />
-                    <div
-                        className="absolute"
-                        style={{
-                            top: "0",
-                            right: `${x2}px`,
-                            height: `${topBarHeight}%`,
-                            width: "10px",
-                            background: "white",
-                        }}
-                    />
-                    <div
-                        className="absolute"
-                        style={{
-                            bottom: "0px",
-                            right: `${x2}px`,
-                            height: `${botBarHeight}%`,
-                            width: "10px",
-                            background: "white",
-                        }}
-                    />
+                    {getBars()}
                 </div>
                 <button
                     className="h-16 w-64 bg-white rounded m-4"
