@@ -1,14 +1,11 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 function Grid({ dir }) {
     const [x, setX] = useState(0);
     const [y, setY] = useState(0);
-    const intervalRef = useRef(null);
 
     useEffect(() => {
-        clearInterval(intervalRef.current);
-
-        const intervalId = setInterval(() => {
+        const interval = setInterval(() => {
             if (dir === "up") {
                 setY((prevY) => {
                     const nextY = prevY - 10;
@@ -31,9 +28,7 @@ function Grid({ dir }) {
                 });
             }
 
-            intervalRef.current = intervalId;
-
-            return () => clearInterval(intervalId);
+            return () => clearInterval(interval);
         }, 1000);
     }, [dir]);
 
