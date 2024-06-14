@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 function Control({ setDir }) {
     const [clickedButton, setClickedButton] = useState(null);
+    const prevDirRef = useRef(null);
 
     const handleClick = (buttonId) => {
         setClickedButton(buttonId);
+        setDir(buttonId);
         setTimeout(() => {
             setClickedButton(null);
         }, 200);
@@ -12,22 +14,19 @@ function Control({ setDir }) {
 
     useEffect(() => {
         const handleKeyDown = (event) => {
+            let newDir;
             switch (event.key) {
                 case "ArrowLeft":
                     handleClick("left");
-                    setDir("left");
                     break;
                 case "ArrowUp":
                     handleClick("up");
-                    setDir("up");
                     break;
                 case "ArrowDown":
                     handleClick("down");
-                    setDir("down");
                     break;
                 case "ArrowRight":
                     handleClick("right");
-                    setDir("right");
                     break;
             }
         };
