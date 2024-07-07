@@ -57,10 +57,12 @@ function TicTacToe() {
         newBoxStatus.set(id, 1);
         setBoxStatus(newBoxStatus);
 
-        const computerMove = Computer(newBoxStatus);
-        newBoxStatus.set(computerMove, 2);
+        setTimeout(() => {
+            const computerMove = Computer(newBoxStatus, win);
+            newBoxStatus.set(computerMove, 2);
 
-        setBoxStatus(newBoxStatus);
+            setBoxStatus(newBoxStatus);
+        }, 1000);
     };
 
     const handleClick2 = (id) => {
@@ -75,6 +77,7 @@ function TicTacToe() {
 
     useEffect(() => {
         checkWin();
+
     }, [boxStatus]);
 
     const checkWin = () => {
